@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fatemeh Sheybani — CV</title>
+<style>
+  /* Vendored fonts (same as the site) */
+  @font-face { font-family:"Fraunces"; font-weight:600; font-display:swap; src:url("assets/fonts/fraunces-600.woff2") format("woff2"); }
+  @font-face { font-family:"Fraunces"; font-weight:500; font-display:swap; src:url("assets/fonts/fraunces-500.woff2") format("woff2"); }
+  @font-face { font-family:"Mulish"; font-weight:400; font-display:swap; src:url("assets/fonts/mulish-400.woff2") format("woff2"); }
+  @font-face { font-family:"Mulish"; font-weight:600; font-display:swap; src:url("assets/fonts/mulish-600.woff2") format("woff2"); }
+  @font-face { font-family:"Mulish"; font-weight:700; font-display:swap; src:url("assets/fonts/mulish-700.woff2") format("woff2"); }
+
+  :root{
+    --ink:#2B2621; --soft:#5C544A; --mute:#8A8073;
+    --clay:#B85C38; --deep:#241E2B; --border:#E7DCCB; --tint:#F3EBDD;
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Mulish","Segoe UI",system-ui,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#EFE7DA;color:var(--ink);font-family:var(--sans);line-height:1.5;font-size:13.5px;}
+
+  .bar{max-width:820px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .bar span{color:var(--mute);font-size:.85rem;}
+  .bar button{background:var(--clay);color:#fff;border:0;border-radius:999px;padding:.6rem 1.4rem;font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s;}
+  .bar button:hover{background:#9C4527;}
+  .bar button svg{width:15px;height:15px;}
+
+  .page{max-width:820px;margin:0 auto 40px;background:#fff;padding:48px 54px 54px;box-shadow:0 14px 44px -18px rgba(43,38,33,.32);}
+
+  /* Header */
+  .head{border-bottom:2px solid var(--border);padding-bottom:18px;margin-bottom:22px;}
+  h1{font-family:var(--serif);font-weight:600;font-size:2.3rem;margin:0 0 3px;letter-spacing:-.01em;}
+  .title{color:var(--clay);font-weight:600;font-size:1.02rem;margin:0 0 14px;}
+  .contact{display:flex;flex-wrap:wrap;gap:7px 20px;}
+  .ci{display:inline-flex;align-items:center;gap:7px;color:var(--soft);font-size:.86rem;text-decoration:none;}
+  a.ci:hover{color:var(--clay);}
+  .ci svg{width:14px;height:14px;flex-shrink:0;color:var(--clay);}
+
+  /* Sections */
+  h2{font-family:var(--sans);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+     color:var(--deep);margin:22px 0 12px;display:flex;align-items:center;gap:10px;}
+  h2::after{content:"";flex:1;height:1px;background:var(--border);}
+  .lead{color:var(--soft);font-size:.95rem;margin:0;}
+
+  .job{margin-bottom:14px;}
+  .job:last-child{margin-bottom:0;}
+  .job__top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .job__role{font-weight:700;color:var(--ink);}
+  .job__org{color:var(--clay);font-weight:600;}
+  .job__when{color:var(--mute);font-size:.82rem;white-space:nowrap;}
+  .job ul{margin:5px 0 0;padding-inline-start:16px;color:var(--soft);}
+  .job li{margin-bottom:2px;}
+  .job li::marker{color:var(--clay);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px 28px;}
+
+  .skills{display:grid;grid-template-columns:110px 1fr;gap:7px 16px;font-size:.9rem;}
+  .skills dt{font-weight:700;color:var(--deep);}
+  .skills dd{margin:0;color:var(--soft);}
+
+  .certlist{columns:2;column-gap:28px;color:var(--soft);font-size:.9rem;margin:0;padding:0;list-style:none;}
+  .certlist li{margin-bottom:5px;break-inside:avoid;display:flex;gap:8px;align-items:flex-start;}
+  .certlist li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--clay);margin-top:6px;flex-shrink:0;}
+  .muted{color:var(--mute);}
+
+  @media print{
+    @page{margin:13mm;}
+    body{background:#fff;font-size:10.8px;}
+    .bar{display:none;}
+    .page{box-shadow:none;max-width:none;margin:0;padding:0;}
+    h2{margin-top:15px;}
+    a{color:inherit;}
+  }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <span>To save as PDF: press <strong>Ctrl/Cmd&nbsp;+&nbsp;P</strong> → “Save as PDF”.</span>
+    <button onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download PDF
+    </button>
+  </div>
+
+  <main class="page">
+    <header class="head">
+      <h1>Fatemeh Sheybani</h1>
+      <p class="title">Product Analyst — at the intersection of data, technology &amp; business</p>
+      <div class="contact">
+        <span class="ci">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Tehran, Iran
+        </span>
+        <a class="ci" href="mailto:fatemehsheybani79@gmail.com">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          fatemehsheybani79@gmail.com
+        </a>
+        <a class="ci" href="https://www.linkedin.com/in/fatemeh-sheybani">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          linkedin.com/in/fatemeh-sheybani
+        </a>
+        <a class="ci" href="https://github.com/FatemehKare1">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          github.com/FatemehKare1
+        </a>
+        <a class="ci" href="https://www.kaggle.com/fatemehsheybani/code">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.336"/></svg>
+          kaggle.com/fatemehsheybani
+        </a>
+        <a class="ci" href="https://fatemehsheybani.ir">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.7 2.6 4 6 4 9.5s-1.3 6.9-4 9.5c-2.7-2.6-4-6-4-9.5s1.3-6.9 4-9.5z"/></svg>
+          fatemehsheybani.ir
+        </a>
+      </div>
+    </header>
+
+    <h2>Profile</h2>
+    <p class="lead">Product Analyst working at the intersection of market research, data analysis, and product
+      management. Industrial Engineering graduate who turns messy questions into decisions — cleaning and
+      modeling data, sizing markets, and shaping the story that moves a product forward. Currently building
+      Market Navigator, an AI-native startup-intelligence workspace.</p>
+
+    <h2>Experience</h2>
+    <div class="job">
+      <div class="job__top"><span><span class="job__role">Product Analyst</span>, <span class="job__org">Kareone</span></span><span class="job__when">Oct 2025 – Present</span></div>
+      <ul>
+        <li>Own research, data, and product decisions across the flow — from raw idea to a decision-ready verdict.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job__top"><span><span class="job__role">Market Research Analyst</span>, <span class="job__org">Pars Iranian AI Technologists</span></span><span class="job__when">Apr 2025 – Oct 2025</span></div>
+      <ul><li>Market and data research supporting AI-driven products (on-site).</li></ul>
+    </div>
+    <div class="job">
+      <div class="job__top"><span><span class="job__role">Associate Product Manager</span> (Internship), <span class="job__org">Kanoon Sarrafan Iranian</span></span><span class="job__when">Jun 2023 – Aug 2023</span></div>
+      <ul>
+        <li>Bug reporting and task tracking in Trello.</li>
+        <li>Authored a business plan with a financial model in Excel.</li>
+        <li>Built a Business Model Canvas and an investor pitch deck.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job__top"><span><span class="job__role">Content Specialist</span>, <span class="job__org">momino.ir</span></span><span class="job__when">Aug 2020 – Jan 2021</span></div>
+      <ul>
+        <li>SEO content in WordPress; keyword research and prioritization; content strategy.</li>
+        <li>Market and competitor analysis via Google Trends.</li>
+      </ul>
+    </div>
+
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Data</dt><dd>Python, R, SQL / MySQL, Jupyter, data cleaning, churn modeling, web scraping (BeautifulSoup, Selenium), APIs</dd>
+      <dt>Visualization</dt><dd>Power BI, Tableau, Excel (PivotTables), dashboard &amp; report design</dd>
+      <dt>Research</dt><dd>Market sizing, competitor analysis, trend analysis, Google Trends, voice-of-customer / review analysis</dd>
+      <dt>Product</dt><dd>Business Model Canvas, pitch decks, roadmapping, Jira, Product-Led Growth, GA4, user research</dd>
+      <dt>Languages</dt><dd>Persian (native), English (IELTS 8.0)</dd>
+    </dl>
+
+    <h2>Selected Projects</h2>
+    <div class="grid2">
+      <div class="job"><span class="job__role">Waze — User Churn Prediction</span><br><span class="muted">Python · Google Advanced Data Analytics capstone · Kaggle</span></div>
+      <div class="job"><span class="job__role">Cyclistic Bike-Share Analysis</span><br><span class="muted">R &amp; Excel · Google Data Analytics capstone · Kaggle</span></div>
+      <div class="job"><span class="job__role">Jabama — Review Analysis</span><br><span class="muted">Python · web scraping → API · keyword extraction</span></div>
+    </div>
+
+    <h2>Education</h2>
+    <div class="job">
+      <div class="job__top"><span><span class="job__role">B.Sc. Industrial Engineering</span>, <span class="job__org">Iran University of Science and Technology</span></span><span class="job__when">2019 – 2023</span></div>
+      <ul><li>GPA 18.21 / 20.</li></ul>
+    </div>
+
+    <h2>Certifications <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.8rem;">· selection of 18</span></h2>
+    <ul class="certlist">
+      <li>IELTS — Overall Band 8.0 (IDP)</li>
+      <li>Google Advanced Data Analytics</li>
+      <li>Google Data Analytics Professional Certificate</li>
+      <li>Data Analysis &amp; Visualization with Power BI (Microsoft)</li>
+      <li>MySQL for Data Analytics &amp; BI (Udemy)</li>
+      <li>Product-Led Growth Micro-Certification (Product School)</li>
+      <li>Digital Product Management (Coursera)</li>
+      <li>Fundamentals of Digital Marketing (Google)</li>
+    </ul>
+  </main>
+</body>
+</html>

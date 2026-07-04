@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fatemeh Sheybani — From data to decisions</title>
+  <meta name="description" content="Fatemeh Sheybani — Market Research, Data Analysis & Product Management. From data to decisions, and the story in between." />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/fonts.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <!-- ===== Navigation ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="nav__brand" aria-label="Fatemeh Sheybani — home">
+        <span class="nav__monogram">FS</span>
+        <span class="nav__name" data-i18n="brand.name">Fatemeh Sheybani</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#diary" data-i18n="nav.diary">Diary</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a href="cv.html" target="_blank" rel="noopener" class="btn btn--ghost btn--sm nav__cv">
+          <svg class="nav__cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="nav.cv">CV</span>
+        </a>
+        <div class="lang-seg" role="group" aria-label="Language / زبان">
+          <button class="lang-seg__opt" data-lang="en">EN</button>
+          <button class="lang-seg__opt" data-lang="fa">فا</button>
+        </div>
+        <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="hero__eyebrow" data-i18n="hero.eyebrow">Product Analyst</p>
+          <h1 class="hero__title" data-i18n="hero.title">From data to decisions — and the story in between.</h1>
+          <p class="hero__lead" data-i18n="hero.lead"></p>
+          <div class="hero__cta">
+            <a href="#diary" class="btn btn--primary" data-i18n="hero.ctaDiary">Read my Diary</a>
+            <a href="#contact" class="btn btn--ghost" data-i18n="hero.ctaContact">Get in touch</a>
+          </div>
+        </div>
+        <div class="hero__portrait">
+          <div class="portrait">
+            <img src="assets/img/portrait.jpg" alt="Fatemeh Sheybani" id="portraitImg" />
+          </div>
+          <span class="portrait__glow" aria-hidden="true"></span>
+        </div>
+      </div>
+      <a href="#about" class="scroll-cue" aria-label="Scroll to about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="section" id="about">
+      <div class="container section__narrow">
+        <p class="section__kicker" data-i18n="about.kicker">About</p>
+        <h2 class="section__title" data-i18n="about.title">Hello, I'm Fatemeh.</h2>
+        <div class="about__body" id="aboutBody"></div>
+      </div>
+    </section>
+
+    <!-- ===== Expertise (3 pillars) ===== -->
+    <section class="section section--tint" id="expertise">
+      <div class="container">
+        <p class="section__kicker" data-i18n="expertise.kicker">Expertise</p>
+        <h2 class="section__title" data-i18n="expertise.title">Three ways I think about a problem.</h2>
+        <div class="pillars" id="pillars"></div>
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section class="section" id="work">
+      <div class="container">
+        <p class="section__kicker" data-i18n="experience.kicker">Experience</p>
+        <h2 class="section__title" data-i18n="experience.title">Where I've worked.</h2>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="section section--tint" id="projects">
+      <div class="container">
+        <p class="section__kicker" data-i18n="projects.kicker">Selected work</p>
+        <h2 class="section__title" data-i18n="projects.title">Projects & analyses.</h2>
+        <div class="cards" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== Certifications ===== -->
+    <section class="section" id="certs">
+      <div class="container">
+        <p class="section__kicker" data-i18n="certs.kicker">Credentials</p>
+        <h2 class="section__title" data-i18n="certs.title">Certifications & education.</h2>
+        <div class="certs" id="certs-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== Testimonials ===== -->
+    <section class="section section--tint" id="testimonials">
+      <div class="container section__narrow">
+        <p class="section__kicker" data-i18n="testimonials.kicker">Kind words</p>
+        <h2 class="section__title" data-i18n="testimonials.title">What people say.</h2>
+        <div class="quotes" id="quotes"></div>
+      </div>
+    </section>
+
+    <!-- ===== Diary ===== -->
+    <section class="section" id="diary">
+      <div class="container">
+        <p class="section__kicker" data-i18n="diary.kicker">Diary</p>
+        <h2 class="section__title" data-i18n="diary.title">First-hand notes.</h2>
+        <p class="section__intro" data-i18n="diary.intro"></p>
+        <div class="diary" id="diary-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section section--dark" id="contact">
+      <div class="container section__narrow">
+        <p class="section__kicker" data-i18n="contact.kicker">Contact</p>
+        <h2 class="section__title" data-i18n="contact.title">Let's talk.</h2>
+        <p class="section__intro" data-i18n="contact.intro"></p>
+        <div class="contact__links" id="contact-links"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy" data-i18n="footer.copy">© 2026 Fatemeh Sheybani · Tehran, Iran</p>
+    </div>
+  </footer>
+
+  <!-- ===== Diary reader modal ===== -->
+  <div class="modal" id="diaryModal" aria-hidden="true">
+    <div class="modal__overlay" data-close></div>
+    <article class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal__close" data-close aria-label="Close">&times;</button>
+      <p class="modal__date" id="modalDate"></p>
+      <h3 class="modal__title" id="modalTitle"></h3>
+      <div class="modal__tags" id="modalTags"></div>
+      <div class="modal__body" id="modalBody"></div>
+    </article>
+  </div>
+
+  <!-- Data + logic (plain scripts so the site opens by double-click, no server needed) -->
+  <script src="assets/js/i18n.js"></script>
+  <script src="data/content.js"></script>
+  <script src="data/diary.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

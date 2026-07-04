@@ -1,0 +1,52 @@
+/* ============================================================
+   Self-hosted fonts (vendored — no CDN).
+   Fraunces  → warm elegant serif (headings)
+   Mulish    → clean humanist sans (body)
+   Vazirmatn → Persian (all text in FA mode)
+   ============================================================ */
+
+/* ---- Fraunces (serif) ---- */
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/fraunces-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../fonts/fraunces-600.woff2") format("woff2");
+}
+
+/* ---- Mulish (sans) ---- */
+@font-face {
+  font-family: "Mulish";
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/mulish-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mulish";
+  font-style: normal; font-weight: 600; font-display: swap;
+  src: url("../fonts/mulish-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mulish";
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/mulish-700.woff2") format("woff2");
+}
+
+/* ---- Vazirmatn (Persian) ---- */
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/vazirmatn-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/vazirmatn-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url("../fonts/vazirmatn-700.woff2") format("woff2");
+}
