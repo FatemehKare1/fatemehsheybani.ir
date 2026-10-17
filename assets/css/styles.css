@@ -430,6 +430,7 @@ main { transition: opacity .28s ease; }
 
 @media (max-width: 520px) {
   body { font-size: 16px; }
+  .portrait__glow { inset: -10% -6% -6%; }
   .container { padding-inline: 18px; }
   .certs, .contact__links { grid-template-columns: 1fr; }
   .section__title { font-size: 1.5rem; }

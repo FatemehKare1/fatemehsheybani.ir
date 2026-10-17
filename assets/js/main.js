@@ -85,13 +85,7 @@ const CONTACT = [
   }
 
   function renderProjects() {
-    $("#projects-grid").innerHTML = window.CONTENT.projects.map(p => `
-      <article class="card reveal">
-        <p class="card__eyebrow">${esc(p[lang].eyebrow)}</p>
-        <h3>${esc(p[lang].title)}</h3>
-        <p>${esc(p[lang].desc)}</p>
-        <div class="card__tags">${p.tags.map(tag => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
-      </article>`).join("");
+    window.WorkStory.render(lang, window.CONTENT.projects);
   }
 
   function renderCerts() {

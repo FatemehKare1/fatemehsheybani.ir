@@ -16,6 +16,7 @@ window.I18N = {
     "hero.title": "From data to decisions — and the story in between.",
     "hero.lead": "A Product Analyst working at the intersection of data, technology, and business — turning messy questions into decisions people can actually act on.",
     "hero.ctaDiary": "Read my Diary",
+    "hero.ctaWork": "Explore my work",
     "hero.ctaContact": "Get in touch",
 
     "about.kicker": "About",
@@ -32,8 +33,8 @@ window.I18N = {
     "experience.kicker": "Experience",
     "experience.title": "Where I've worked.",
 
-    "projects.kicker": "Selected work",
-    "projects.title": "Projects & analyses.",
+    "projects.kicker": "A thread through my work",
+    "projects.title": "A question. A pattern. A way forward.",
 
     "certs.kicker": "Credentials",
     "certs.title": "Certifications & education.",
@@ -58,7 +59,7 @@ window.I18N = {
     "brand.name": "فاطمه شیبانی",
     "nav.about": "درباره",
     "nav.expertise": "تخصص",
-    "nav.work": "تجربه",
+    "nav.work": "کارهایم",
     "nav.diary": "دفترچه",
     "nav.contact": "تماس",
     "nav.cv": "رزومه",
@@ -67,6 +68,7 @@ window.I18N = {
     "hero.title": "از داده تا تصمیم، و روایتی که در میان است.",
     "hero.lead": "تحلیل‌گر محصول، در تلاقیِ داده، فناوری و کسب‌وکار — پرسش‌های درهم‌ریخته را به تصمیم‌هایی تبدیل می‌کنم که می‌شود روی‌شان دست گذاشت.",
     "hero.ctaDiary": "دفترچه‌ام را بخوان",
+    "hero.ctaWork": "روایت کارهایم را ببین",
     "hero.ctaContact": "در تماس باش",
 
     "about.kicker": "درباره",
@@ -83,8 +85,8 @@ window.I18N = {
     "experience.kicker": "تجربه",
     "experience.title": "جاهایی که کار کرده‌ام.",
 
-    "projects.kicker": "نمونه‌کار",
-    "projects.title": "پروژه‌ها و تحلیل‌ها.",
+    "projects.kicker": "رشته‌ای که کارهایم را به هم وصل می‌کند",
+    "projects.title": "یک پرسش. یک الگو. راهی برای ادامه.",
 
     "certs.kicker": "مدارک",
     "certs.title": "گواهی‌نامه‌ها و تحصیلات.",
