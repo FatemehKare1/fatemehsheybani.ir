@@ -7,40 +7,51 @@
   let host, chapterEls = [], links = [], pending = false;
   const tags = items => items.map(tag => `<span class="tag">${esc(tag)}</span>`).join("");
 
-  function diagram(kind) {
-    if (kind === "map") return `
-      <svg class="story-map" viewBox="0 0 360 240" aria-hidden="true">
-        <circle class="story-map__orbit" cx="180" cy="123" r="85"/>
-        <path class="story-map__link" d="M180 123L180 38M180 123L80 182M180 123L280 182"/>
-        <circle class="story-map__core" cx="180" cy="123" r="30"/>
-        <path class="story-map__spark" d="M168 123h24m-12-12v24"/>
-        <g data-node="0"><circle cx="180" cy="38" r="18"/><circle class="story-map__halo" cx="180" cy="38" r="25"/></g>
-        <g data-node="1"><circle cx="80" cy="182" r="18"/><circle class="story-map__halo" cx="80" cy="182" r="25"/></g>
-        <g data-node="2"><circle cx="280" cy="182" r="18"/><circle class="story-map__halo" cx="280" cy="182" r="25"/></g>
-      </svg>`;
-    if (kind === "trace") return `
-      <div class="story-trace" aria-hidden="true">
-        <div data-node="0" class="story-trace__row"><i></i><i></i><i></i><i></i><i></i></div>
-        <span class="story-trace__connector"></span>
-        <div data-node="1" class="story-trace__row"><i></i><i></i><i></i></div>
-        <span class="story-trace__connector"></span>
-        <div data-node="2" class="story-trace__row"><span class="story-trace__check">✓</span><i></i><i></i></div>
+  function diagram(chapter, numeral) {
+    const labels = chapter.artifact.labels;
+    const label = item => `<strong>${esc(item.title)}</strong><small>${esc(item.detail)}</small>`;
+    if (chapter.visual === "map") {
+      const icons = [
+        '<path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16"/>',
+        '<path d="M4 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-3H4V4Zm9 3a3 3 0 0 1 3-3h4v14h-3a4 4 0 0 0-4 3"/>',
+        '<path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/>'
+      ];
+      return `
+      <div class="artifact-map">
+        <ul class="artifact-map__inputs">${labels.map((item, n) => `
+          <li class="artifact-map__node" data-node="${n}">
+            <span class="artifact-map__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${icons[n]}</svg>
+            </span>${label(item)}
+          </li>`).join("")}
+        </ul>
+        <div class="artifact-map__connection" aria-hidden="true"></div>
+        <p class="artifact-map__core">${esc(chapter.center)}</p>
       </div>`;
-    if (kind === "pipeline") return `
-      <div class="story-pipeline" aria-hidden="true">
-        <div data-node="0"><span>01</span><i></i><i></i><i></i></div>
-        <b class="story-pipeline__link"></b>
-        <div data-node="1"><span>02</span><i></i><i></i><i></i></div>
-        <b class="story-pipeline__link"></b>
-        <div data-node="2"><span>03</span><i></i><i></i><i></i></div>
-      </div>`;
-    return `
-      <div class="story-device" aria-hidden="true">
-        <span class="story-device__speaker"></span>
-        <div data-node="0" class="story-device__locale"><span>فا</span><span>EN</span><i></i></div>
-        <div data-node="1" class="story-device__review"><span>✓</span><i></i><i></i></div>
-        <div data-node="2" class="story-device__choices"><i></i><i></i><i></i></div>
-      </div>`;
+    }
+    if (chapter.visual === "product") {
+      const glyphs = [
+        '<span class="artifact-product__language" lang="fa">فا</span><span class="artifact-product__language" lang="en">EN</span>',
+        '<span class="artifact-product__check">✓</span><span class="artifact-product__edit"><i></i><i></i></span>',
+        '<span class="artifact-product__links"><i></i><i></i><i></i></span>'
+      ];
+      return `<ol class="artifact-product">${labels.map((item, n) => `
+        <li data-node="${n}">
+          <span class="artifact-step" aria-hidden="true">${numeral(n + 1)}</span>
+          <div class="artifact-product__screen" aria-hidden="true"><span class="artifact-product__bar"></span>
+            <div class="artifact-product__glyph">${glyphs[n]}</div></div>
+          ${label(item)}
+        </li>`).join("")}</ol>`;
+    }
+    return `<ol class="artifact-flow artifact-flow--${chapter.visual}">${labels.map((item, n) => `
+      <li data-node="${n}">
+        <span class="artifact-step" aria-hidden="true">${numeral(n + 1)}</span>
+        <div class="artifact-flow__symbol artifact-flow__symbol--${n}" aria-hidden="true">
+          ${chapter.visual === "trace" ? "<i></i><i></i><i></i>" : "<i></i><i></i>"}
+        </div>
+        ${label(item)}
+        ${n < 2 ? '<span class="artifact-flow__arrow" aria-hidden="true">→</span>' : ""}
+      </li>`).join("")}</ol>`;
   }
 
   function render(lang, foundations) {
@@ -58,7 +69,7 @@
           <p class="story-rail__heading">${esc(copy.nav)}</p>
           <nav class="story-nav" aria-label="${esc(copy.nav)}">
             ${copy.chapters.map((c, i) => `<a href="#chapter-${c.id}" data-chapter-link="${c.id}">
-              <span class="story-nav__number">${numeral(i + 1)}</span><span>${esc(c.label)}</span>
+              <span class="story-nav__number">${numeral(i + 1)}</span><span>${esc(c.word)}</span>
             </a>`).join("")}
           </nav>
           <div class="story-progress" aria-hidden="true"><span></span></div>
@@ -77,10 +88,14 @@
               </header>
               <div class="story-chapter__body reveal">${c.body.map(p => `<p>${esc(p)}</p>`).join("")}</div>
               <div class="story-lab" data-lab="${c.id}">
-                <div class="story-lab__picture" data-stage="${index}">
-                  ${diagram(c.visual)}
-                  <p class="story-lab__caption">${esc(c.center)}</p>
-                </div>
+                <figure class="story-lab__picture" data-stage="${index}" aria-labelledby="artifact-${c.id}">
+                  <div class="artifact-heading">
+                    <p>${esc(copy.illustrated)}</p>
+                    <h4 id="artifact-${c.id}">${esc(c.artifact.title)}</h4>
+                  </div>
+                  ${diagram(c, numeral)}
+                  <figcaption class="story-lab__caption">${esc(c.artifact.caption)}</figcaption>
+                </figure>
                 <div class="story-lab__controls">
                   <p class="story-lab__eyebrow">${esc(copy.explore)}</p>
                   <div class="story-tabs" role="tablist" aria-label="${esc(c.word)}">
@@ -126,10 +141,9 @@
             <div class="card__tags">${tags(p.tags)}</div></article>`).join("")}</div>
       </details>
       <div class="story-ending" id="story-ending">
-        <span class="story-ending__mark" aria-hidden="true">↗</span>
         <p class="section__kicker">${esc(copy.closing)}</p>
         <p class="story-ending__text">${esc(copy.closingBody)}</p>
-        <a href="#contact" class="btn btn--primary">${esc(copy.contact)}</a>
+        <a href="#contact" class="story-ending__contact">${esc(copy.contact)} ↗</a>
         <a href="#projects" class="story-ending__back">${esc(copy.end)} ↑</a>
       </div>`;
 

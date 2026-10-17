@@ -37,10 +37,20 @@ data/
 - **Contact links:** the `CONTACT` array at the top of `assets/js/main.js`
 
 The work section follows four connected chapters: context, evidence, decisions,
-and delivery. Approach tabs support arrow keys, Home, and End; project evidence
+and delivery. Each chapter has an illustrated summary built from local HTML,
+CSS, and SVG; these are explanatory diagrams rather than project screenshots.
+The Insights → GTM → Pitch chapter uses a dark editorial spread. Approach tabs
+support arrow keys, Home, and End; project evidence
 uses native expandable details. Language switching preserves selected tabs and
-expanded details. Motion follows the reader and respects reduced-motion settings.
+expanded details, including About, methods, and credentials. Motion follows
+the reader and respects reduced-motion settings.
 Earlier analyses remain available in the expandable foundations section.
+
+Expertise, experience, and education share the Background section; full
+credentials remain expandable. Diary uses a featured entry and a compact index,
+with keyboard focus contained in the reader and restored on close. Contact
+prioritizes email and the CV. CV styling changes apply only on screen; the
+existing print layout is preserved.
 
 Project descriptions are public-facing summaries of repository evidence.
 Keep private source documents, datasets, and repository links outside the site.

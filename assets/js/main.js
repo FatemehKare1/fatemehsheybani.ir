@@ -51,35 +51,44 @@ const CONTACT = [
       const val = t(el.getAttribute("data-i18n"));
       if (typeof val === "string") el.innerHTML = val;
     });
+    $$("[data-i18n-label]").forEach(el => {
+      const val = t(el.getAttribute("data-i18n-label"));
+      if (typeof val === "string") el.setAttribute("aria-label", val);
+    });
   }
 
   function renderAbout() {
     const paras = t("about.body") || [];
-    $("#aboutBody").innerHTML = paras.map(p => `<p class="reveal">${p}</p>`).join("");
+    const open = $("#aboutMore")?.open || false;
+    $("#aboutBody").innerHTML = `<p class="about__summary">${esc(t("about.summary"))}</p>
+      <details id="aboutMore" ${open ? "open" : ""}>
+        <summary>${esc(t("about.more"))}<span aria-hidden="true"> +</span></summary>
+        ${paras.map(p => `<p>${p}</p>`).join("")}
+      </details>`;
   }
 
   function renderPillars() {
-    $("#pillars").innerHTML = window.CONTENT.pillars.map(p => `
+    const open = $$("#pillars details").map(el => el.open);
+    $("#pillars").innerHTML = window.CONTENT.pillars.map((p, index) => `
       <article class="pillar reveal">
         <div class="pillar__icon">${PILLAR_ICONS[p.icon] || ""}</div>
         <h3>${esc(p[lang].title)}</h3>
         <p>${esc(p[lang].body)}</p>
-        <div class="pillar__tags">${p.tags.map(tag => `<span class="tag">${esc(tag)}</span>`).join("")}</div>
+        <details class="pillar__methods" ${open[index] ? "open" : ""}><summary>${esc(t("background.tools"))} +</summary>
+          <p>${p.tags.map(esc).join(" · ")}</p></details>
       </article>`).join("");
   }
 
   function renderExperience() {
     $("#timeline").innerHTML = window.CONTENT.experience.map(e => `
       <li class="tl reveal">
-        <span class="tl__dot"></span>
-        <div class="tl__meta">
-          <span class="tl__role">${esc(e[lang].role)}</span>
+        <span class="tl__dot" aria-hidden="true"></span>
+        <div class="tl__period">
+          <span class="tl__when">${esc(e.when[lang])}</span>
           <span class="tl__badge">${esc(e.badge[lang])}</span>
         </div>
-        <div class="tl__meta">
-          <span class="tl__org">${esc(e[lang].org)}</span>
-          <span class="tl__when">${esc(e.when[lang])}</span>
-        </div>
+        <h4 class="tl__role">${esc(e[lang].role)}</h4>
+        <p class="tl__org">${esc(e[lang].org)}</p>
         <p class="tl__desc">${esc(e[lang].desc)}</p>
       </li>`).join("");
   }
@@ -90,23 +99,33 @@ const CONTACT = [
 
   function renderCerts() {
     const c = window.CONTENT;
+    const open = $("#credential-details")?.open || false;
     const edu = `
       <div class="cert cert--edu reveal">
-        <span class="cert__mark">◆</span>
+        <span class="cert__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5-10-5Zm4 2v6c4 3 8 3 12 0v-6M22 9v7"/></svg>
+        </span>
         <div>
-          <div class="cert__name">${esc(c.education[lang].name)}</div>
-          <div class="cert__by">${esc(c.education[lang].by)}</div>
+          <h4 class="cert__name">${esc(c.education[lang].name)}</h4>
+          <div class="cert__by cert__education-meta">${c.education[lang].by.split(" · ").map(part => `<span>${esc(part)}</span>`).join("")}</div>
         </div>
       </div>`;
-    const items = c.certs.map(cert => `
+    const item = cert => `
       <div class="cert reveal">
-        <span class="cert__mark">✦</span>
+        <span class="cert__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="m9 12-2 8 5-3 5 3-2-8"/></svg>
+        </span>
         <div>
-          <div class="cert__name">${esc(cert[lang].name)}</div>
+          <h4 class="cert__name">${esc(cert[lang].name)}</h4>
           <div class="cert__by">${esc(cert[lang].by)}</div>
         </div>
-      </div>`).join("");
-    $("#certs-grid").innerHTML = edu + items;
+      </div>`;
+    $("#certs-grid").innerHTML = edu + c.certs.slice(0, 2).map(item).join("") +
+      `<details class="credential-details" id="credential-details" ${open ? "open" : ""}>
+        <summary>${esc(t("background.more"))} <span aria-hidden="true">+</span></summary>
+        <p class="credentials-note">${esc(c.certsNote[lang])}</p>
+        ${c.certs.slice(2).map(item).join("")}
+      </details>`;
   }
 
   function renderTestimonials() {
@@ -124,8 +143,9 @@ const CONTACT = [
 
   function renderDiary() {
     const entries = [...window.DIARY].sort((a, b) => (a.iso < b.iso ? 1 : -1));
-    $("#diary-grid").innerHTML = entries.map(e => `
-      <button class="entry reveal" data-entry="${esc(e.id)}">
+    $("#diary-grid").innerHTML = entries.map((e, index) => `
+      <button class="entry ${index === 0 ? "entry--featured" : ""} reveal" data-entry="${esc(e.id)}">
+        <span class="entry__index" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
         <span class="entry__date">${esc(e.date[lang])}</span>
         <span class="entry__title">${esc(e[lang].title)}</span>
         <span class="entry__excerpt">${esc(e[lang].excerpt)}</span>
@@ -137,11 +157,21 @@ const CONTACT = [
   }
 
   function renderContact() {
-    $("#contact-links").innerHTML = CONTACT.map(c => `
-      <a class="clink reveal" href="${esc(c.href)}" target="_blank" rel="noopener" aria-label="${esc(c.label[lang])}">
+    const email = CONTACT.find(c => c.icon === "email");
+    $("#contact-links").innerHTML = `
+      <div class="contact__invitation">
+        <a class="contact__email" href="${esc(email.href)}">
+          <span>${esc(t("contact.email"))} <span aria-hidden="true">↗</span></span>
+          <span class="contact__address" dir="ltr">${esc(email.href.replace("mailto:", ""))}</span>
+        </a>
+        <a class="contact__cv" href="cv.html">${esc(t("contact.cv"))} <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="contact__elsewhere"><p>${esc(t("contact.elsewhere"))}</p>
+      <div class="contact__profiles">${CONTACT.filter(c => c.icon !== "email").map(c => `
+      <a class="clink" href="${esc(c.href)}" target="_blank" rel="noopener" aria-label="${esc(c.label[lang])}">
         <span class="clink__icon">${ICONS[c.icon] || ""}</span>
         <span>${esc(c.label[lang])}</span>
-      </a>`).join("");
+      </a>`).join("")}</div></div>`;
   }
 
   function renderAll() {
@@ -173,9 +203,11 @@ const CONTACT = [
 
   /* ---------- Diary modal ---------- */
   const modal = $("#diaryModal");
+  let diaryTrigger;
   function openDiary(id) {
     const e = window.DIARY.find(x => x.id === id);
     if (!e) return;
+    diaryTrigger = document.activeElement;
     $("#modalDate").textContent  = e.date[lang];
     $("#modalTitle").textContent = e[lang].title;
     $("#modalTags").innerHTML    = e.tags.map(tag => `<span class="tag">${esc(tag)}</span>`).join("");
@@ -183,14 +215,32 @@ const CONTACT = [
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    $$("body > header, body > main, body > footer").forEach(el => { el.inert = true; });
+    $(".modal__close", modal).focus();
   }
   function closeDiary() {
+    if (!modal.classList.contains("is-open")) return;
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    $$("body > header, body > main, body > footer").forEach(el => { el.inert = false; });
+    if (diaryTrigger?.isConnected) diaryTrigger.focus();
   }
   $$("[data-close]").forEach(el => el.addEventListener("click", closeDiary));
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeDiary(); });
+  document.addEventListener("keydown", event => {
+    if (!modal.classList.contains("is-open")) return;
+    if (event.key === "Escape") { event.preventDefault(); closeDiary(); }
+    if (event.key === "Tab") {
+      const focusable = $$('button, a[href], [tabindex]:not([tabindex="-1"])', modal)
+        .filter(el => el.getClientRects().length);
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first.focus();
+      }
+    }
+  });
 
   /* ---------- Nav ---------- */
   const nav = $("#nav");

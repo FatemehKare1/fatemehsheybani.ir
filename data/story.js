@@ -3,6 +3,7 @@
    Private source documents and datasets are not bundled with this site. */
 window.WORK_STORY = {
   en: {
+    illustrated: "Illustrated summary",
     intro: "A market report, a data pipeline, and a product interface can look like separate kinds of work. For me, they belong to the same question: how do we turn something uncertain into something a person can use? Follow the thread.",
     nav: "Follow the thread", navHint: "Four chapters · one connected approach",
     chapter: "Chapter", explore: "Explore the approach", evidence: "The work behind this chapter",
@@ -15,6 +16,15 @@ window.WORK_STORY = {
     chapters: [
       {
         id: "context", label: "Read the context", word: "Context", visual: "map",
+        artifact: {
+          title: "An opportunity, in context",
+          caption: "Sector maps, sources, and scenarios connect the landscape to a question worth investigating.",
+          labels: [
+            { title: "Sector map", detail: "Energy and industrial technology in Oman" },
+            { title: "Source register", detail: "A traceable basis for each claim" },
+            { title: "Scenarios", detail: "Explore assumptions before narrowing the opportunity" }
+          ]
+        },
         title: "Before the answer, understand the landscape.",
         body: ["My starting point is the situation around a question: the market, the people in it, and the constraints that make one opportunity different from another.",
           "The Oman energy research and insurance investment work bring that thinking into view. Sector maps, source registers, and scenarios connect a broad landscape to specific questions worth investigating."],
@@ -38,6 +48,15 @@ window.WORK_STORY = {
       },
       {
         id: "evidence", label: "Question the evidence", word: "Evidence", visual: "trace",
+        artifact: {
+          title: "From records to reviewable matches",
+          caption: "Inspect data quality, normalize records, and review fit before trusting a shortlist.",
+          labels: [
+            { title: "Inspect", detail: "Quality gaps and identity collisions" },
+            { title: "Normalize", detail: "Reusable records with explicit unknowns" },
+            { title: "Review matches", detail: "Sector, stage, geography, and independent signals" }
+          ]
+        },
         title: "A useful pattern needs a trustworthy foundation.",
         body: ["Once there is a direction, I want to understand what the data can actually support. An apparent match means little if identities collide, fields are missing, or a ranking hides its assumptions.",
           "The investor work connects two layers: normalization and validation underneath; an explorable matching dashboard above. The link between them matters as much as either layer."],
@@ -61,6 +80,15 @@ window.WORK_STORY = {
       },
       {
         id: "decisions", label: "Connect to a decision", word: "Decisions", visual: "pipeline",
+        artifact: {
+          title: "One evidence trail, three outputs",
+          caption: "Research feeds GTM strategy, then pitch materials; shared values stay connected to their source.",
+          labels: [
+            { title: "Insights", detail: "Market Navigator Insights · research synthesis" },
+            { title: "GTM strategy", detail: "GTM Report Engine · priorities and positioning" },
+            { title: "Pitch", detail: "Pitch Deck Engine · a coherent narrative" }
+          ]
+        },
         title: "Let the research carry through to the next decision.",
         body: ["An insight becomes more useful when it survives the handoff. The market analysis, the go-to-market plan, and the pitch should tell a coherent story from the same evidence.",
           "That connection is explicit in the Market Navigator engines: research feeds strategy, and strategy feeds communication. Shared values come from one producer so that the story stays consistent as its form changes."],
@@ -84,6 +112,15 @@ window.WORK_STORY = {
       },
       {
         id: "delivery", label: "Make it usable", word: "Delivery", visual: "product",
+        artifact: {
+          title: "An interface shaped around people",
+          caption: "Across product and research interfaces, local context, human review, and exploration make information usable.",
+          labels: [
+            { title: "Local context", detail: "Persian, Jalali dates, and familiar foods" },
+            { title: "Confirm estimates", detail: "Review AI quantities before food logging" },
+            { title: "Explore information", detail: "Chapters, sources, languages, and scenario controls" }
+          ]
+        },
         title: "The work is complete when someone can use it.",
         body: ["I care about the last mile between analysis and a person. Language, navigation, and the ability to check an assumption shape how useful an output becomes.",
           "The bilingual research interfaces make dense material explorable. CalorieYar brings a different version of the same concern into everyday use: familiar foods, a Persian interface, and a chance to confirm an AI estimate before recording it."],
@@ -108,6 +145,7 @@ window.WORK_STORY = {
     ]
   },
   fa: {
+    illustrated: "خلاصهٔ تصویری",
     intro: "گزارش بازار، خط پردازش داده و رابط محصول شاید کارهایی جدا به نظر برسند. برای من، همگی به یک پرسش وصل‌اند: چطور چیزی نامطمئن را به چیزی تبدیل کنیم که یک نفر بتواند از آن استفاده کند؟ این رشته را دنبال کنید.",
     nav: "رشته را دنبال کنید", navHint: "چهار فصل · یک مسیر پیوسته",
     chapter: "فصل", explore: "کاوش در رویکرد", evidence: "کارهایی پشت این فصل",
@@ -120,6 +158,15 @@ window.WORK_STORY = {
     chapters: [
       {
         id: "context", label: "شناخت زمینه", word: "زمینه", visual: "map",
+        artifact: {
+          title: "فرصت، در بستر خودش",
+          caption: "نقشهٔ صنعت، منابع و سناریوها، چشم‌انداز بازار را به پرسشی برای بررسی وصل می‌کنند.",
+          labels: [
+            { title: "نقشهٔ صنعت", detail: "انرژی و فناوری صنعتی در عمان" },
+            { title: "فهرست منابع", detail: "مبنای هر ادعا قابل پیگیری است" },
+            { title: "سناریوها", detail: "بررسی فرض‌ها پیش از محدود کردن فرصت" }
+          ]
+        },
         title: "پیش از پاسخ، چشم‌انداز را بشناسیم.",
         body: ["نقطه شروع من، موقعیت پیرامون یک پرسش است: بازار، آدم‌های آن و محدودیت‌هایی که یک فرصت را از فرصت دیگر متمایز می‌کنند.",
           "پژوهش انرژی عمان و کار پژوهشی سرمایه‌گذاری بیمه، این نگاه را نشان می‌دهند. نقشه‌های صنعت، فهرست منابع و سناریوها، چشم‌اندازی گسترده را به پرسش‌هایی مشخص برای بررسی وصل می‌کنند."],
@@ -140,6 +187,15 @@ window.WORK_STORY = {
       },
       {
         id: "evidence", label: "پرسش از شواهد", word: "شواهد", visual: "trace",
+        artifact: {
+          title: "از رکورد تا تطبیق قابل‌بررسی",
+          caption: "بررسی کیفیت، یکدست‌سازی رکوردها و بازبینی تناسب، مبنای ارزیابی یک فهرست پیشنهادی‌اند.",
+          labels: [
+            { title: "بررسی", detail: "نقص‌های کیفیت و برخورد هویت‌ها" },
+            { title: "یکدست‌سازی", detail: "رکوردهای قابل‌استفاده با موارد نامعلوم مشخص" },
+            { title: "بازبینی تطبیق", detail: "صنعت، مرحله، جغرافیا و نشانه‌های مستقل" }
+          ]
+        },
         title: "یک الگوی مفید، پایه‌ای قابل‌اتکا می‌خواهد.",
         body: ["وقتی جهت روشن شد، می‌خواهم بدانم داده واقعاً چه چیزی را پشتیبانی می‌کند. اگر هویت‌ها تداخل داشته باشند، فیلدها ناقص باشند یا رتبه‌بندی فرض‌هایش را پنهان کند، یک تطبیق ظاهری معنای زیادی ندارد.",
           "کارهای سرمایه‌گذار دو لایه را وصل می‌کنند: نرمال‌سازی و اعتبارسنجی در پایه، و داشبورد قابل‌کاوش تطبیق در سطح. ارتباط میان این دو به اندازه خودشان مهم است."],
@@ -160,6 +216,15 @@ window.WORK_STORY = {
       },
       {
         id: "decisions", label: "پیوند با تصمیم", word: "تصمیم", visual: "pipeline",
+        artifact: {
+          title: "یک مسیر شواهد، سه خروجی",
+          caption: "پژوهش به راهبرد ورود به بازار و سپس ارائه می‌رسد؛ مقادیر مشترک به منبع خود متصل می‌مانند.",
+          labels: [
+            { title: "بینش‌ها", detail: "Market Navigator Insights · ترکیب پژوهش" },
+            { title: "راهبرد GTM", detail: "GTM Report Engine · اولویت‌ها و جایگاه‌یابی" },
+            { title: "ارائه", detail: "Pitch Deck Engine · روایت منسجم" }
+          ]
+        },
         title: "بگذاریم پژوهش در تصمیم بعدی هم حضور داشته باشد.",
         body: ["بینش وقتی مفیدتر می‌شود که در انتقال میان خروجی‌ها باقی بماند. تحلیل بازار، برنامه ورود به بازار و ارائه باید از شواهد یکسان، روایتی منسجم بسازند.",
           "این پیوند در موتورهای مارکت نویگیتور مشخص است: پژوهش به راهبرد می‌رسد و راهبرد به ارتباط. مقادیر مشترک از یک تولیدکننده می‌آیند تا با تغییر شکل ارائه، روایت یکپارچه بماند."],
@@ -180,6 +245,15 @@ window.WORK_STORY = {
       },
       {
         id: "delivery", label: "قابل‌استفاده کردن", word: "کاربرد", visual: "product",
+        artifact: {
+          title: "رابطی با توجه به آدم‌ها",
+          caption: "در رابط‌های محصول و پژوهش، زمینهٔ محلی، بازبینی انسانی و امکان کاوش، اطلاعات را کاربردی می‌کنند.",
+          labels: [
+            { title: "زمینهٔ محلی", detail: "فارسی، تاریخ جلالی و غذاهای آشنا" },
+            { title: "تأیید تخمین", detail: "بازبینی مقدار پیشنهادی هوش مصنوعی پیش از ثبت" },
+            { title: "کاوش اطلاعات", detail: "فصل‌ها، منابع، زبان‌ها و کنترل سناریو" }
+          ]
+        },
         title: "کار وقتی کامل می‌شود که کسی بتواند از آن استفاده کند.",
         body: ["فاصله آخر میان تحلیل و آدم‌ها برایم مهم است. زبان، مسیر حرکت و امکان بررسی یک فرض، میزان کاربردی بودن خروجی را شکل می‌دهند.",
           "رابط‌های پژوهشی دوزبانه، محتوای پیچیده را قابل‌کاوش می‌کنند. کالری‌یار شکل دیگری از همین توجه را به زندگی روزمره می‌آورد: غذاهای آشنا، رابط فارسی و امکان تأیید تخمین هوش مصنوعی پیش از ثبت آن."],

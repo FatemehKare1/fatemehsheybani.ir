@@ -65,6 +65,56 @@
   .certlist li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--clay);margin-top:6px;flex-shrink:0;}
   .muted{color:var(--mute);}
 
+  /* A reading view for the screen; the print document below stays unchanged. */
+  @media screen{
+    body{background:#FAF6EF;font-size:14px;line-height:1.7;}
+    .bar{max-width:940px;padding:28px 30px 22px;flex-wrap:wrap;gap:14px 24px;}
+    .bar__back{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font-weight:700;text-decoration:none;margin-inline-end:auto;min-height:44px;}
+    .bar__back::before{content:"\2190";color:var(--clay);font-size:1.3rem;font-weight:400;transition:transform .2s;}
+    .bar__back:hover{color:var(--clay);}
+    .bar__back:hover::before{transform:translateX(-3px);}
+    .bar span{order:3;flex-basis:100%;font-size:.75rem;color:var(--soft);}
+    .bar button{min-height:44px;border-radius:4px;padding:.7rem 1.15rem;font-size:.82rem;}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--clay);outline-offset:5px;}
+    .page{position:relative;max-width:880px;margin:0 auto 64px;padding:56px 64px 64px;background:#FFFDFA;border:1px solid var(--border);box-shadow:0 20px 70px -38px rgba(43,38,33,.26);}
+    .page::before{content:"Curriculum vitae";display:block;margin-bottom:24px;color:var(--clay);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.18em;}
+    .head{padding-bottom:28px;margin-bottom:30px;border-bottom:1px solid var(--border);}
+    h1{font-size:clamp(2.5rem,5.4vw,3.8rem);line-height:1.12;letter-spacing:-.045em;margin-bottom:14px;}
+    .title{max-width:34rem;font-size:1rem;line-height:1.65;margin-bottom:24px;color:var(--soft);}
+    .contact{gap:11px 24px;}
+    .ci{font-size:.77rem;line-height:1.6;overflow-wrap:anywhere;min-width:0;}
+    h2{font-size:.72rem;letter-spacing:.16em;margin:32px 0 16px;gap:18px;}
+    .lead{font-size:.95rem;line-height:1.85;}
+    .job{margin-bottom:20px;}
+    .job__top{gap:5px 16px;}
+    .job__when{color:var(--soft);font-size:.74rem;}
+    .job ul{margin-top:7px;}
+    .job li{margin-bottom:4px;}
+    .skills{grid-template-columns:110px minmax(0,1fr);gap:12px 22px;font-size:.85rem;}
+    .grid2{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 30px;}
+    .grid2 .job{margin:0;}
+    .muted{color:var(--soft);}
+    .certlist{font-size:.84rem;column-gap:30px;}
+    .certlist li{margin-bottom:10px;}
+  }
+  @media screen and (max-width:640px){
+    .bar{padding:18px 22px 22px;gap:10px 20px;}
+    .page{margin-bottom:0;padding:36px 22px 44px;border-inline:0;box-shadow:none;}
+    .page::before{margin-bottom:22px;}
+    .head{padding-bottom:24px;}
+    h1{font-size:clamp(2.4rem,8.6vw,3.2rem);}
+    .title{font-size:.92rem;}
+    .contact{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;}
+    .ci{font-size:.76rem;}
+    .skills{grid-template-columns:minmax(0,1fr);gap:3px;}
+    .skills dd{margin-bottom:12px;}
+    .grid2{grid-template-columns:minmax(0,1fr);gap:20px;}
+    .certlist{columns:1;}
+  }
+  @media screen and (prefers-reduced-motion:reduce){
+    .bar__back::before,.bar button{transition:none;}
+  }
+
   @media print{
     @page{margin:13mm;}
     body{background:#fff;font-size:10.8px;}
@@ -77,6 +127,7 @@
 </head>
 <body>
   <div class="bar">
+    <a class="bar__back" href="index.html">Back to portfolio</a>
     <span>To save as PDF: press <strong>Ctrl/Cmd&nbsp;+&nbsp;P</strong> → “Save as PDF”.</span>
     <button onclick="window.print()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>

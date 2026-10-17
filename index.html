@@ -19,16 +19,16 @@
         <span class="nav__name" data-i18n="brand.name">Fatemeh Sheybani</span>
       </a>
 
-      <nav class="nav__links" aria-label="Primary">
-        <a href="#about" data-i18n="nav.about">About</a>
+      <nav class="nav__links" id="primaryLinks" aria-label="Primary">
         <a href="#projects" data-i18n="nav.work">Work</a>
-        <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#background" data-i18n="nav.background">Background</a>
         <a href="#diary" data-i18n="nav.diary">Diary</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
 
       <div class="nav__actions">
-        <a href="cv.html" target="_blank" rel="noopener" class="btn btn--ghost btn--sm nav__cv">
+        <a href="cv.html" target="_blank" rel="noopener" class="btn btn--ghost btn--sm nav__cv" data-i18n-label="nav.cv" aria-label="CV">
           <svg class="nav__cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span data-i18n="nav.cv">CV</span>
         </a>
@@ -36,7 +36,7 @@
           <button class="lang-seg__opt" data-lang="en">EN</button>
           <button class="lang-seg__opt" data-lang="fa">فا</button>
         </div>
-        <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+        <button class="nav__burger" id="navBurger" data-i18n-label="nav.menu" aria-label="Menu" aria-expanded="false" aria-controls="primaryLinks">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -46,6 +46,10 @@
   <main id="top">
     <!-- ===== Hero ===== -->
     <section class="hero">
+      <div class="container hero__folio" aria-hidden="true">
+        <span data-i18n="hero.folio">Selected work &amp; field notes</span>
+        <span data-i18n="hero.location">Tehran, Iran</span>
+      </div>
       <div class="container hero__inner">
         <div class="hero__text">
           <p class="hero__eyebrow" data-i18n="hero.eyebrow">Product Analyst</p>
@@ -58,21 +62,31 @@
         </div>
         <div class="hero__portrait">
           <div class="portrait">
-            <img src="assets/img/portrait.jpg" alt="Fatemeh Sheybani" id="portraitImg" />
+            <div class="portrait__crop">
+              <img src="assets/img/portrait.jpg" alt="Fatemeh Sheybani" id="portraitImg" />
+            </div>
           </div>
-          <span class="portrait__glow" aria-hidden="true"></span>
+          <p class="portrait__caption" data-i18n="hero.portraitCaption">The analyst. The storyteller.</p>
+          <div class="hero-thread">
+            <p data-i18n="hero.thread">A thread through my practice</p>
+            <ol>
+              <li><span aria-hidden="true">01</span><span data-i18n="hero.research">Research</span></li>
+              <li><span aria-hidden="true">02</span><span data-i18n="hero.analysis">Analysis</span></li>
+              <li><span aria-hidden="true">03</span><span data-i18n="hero.product">Product</span></li>
+            </ol>
+          </div>
         </div>
       </div>
-      <a href="#about" class="scroll-cue" aria-label="Scroll to about">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </a>
     </section>
 
     <!-- ===== About ===== -->
     <section class="section" id="about">
-      <div class="container section__narrow">
-        <p class="section__kicker" data-i18n="about.kicker">About</p>
-        <h2 class="section__title" data-i18n="about.title">Hello, I'm Fatemeh.</h2>
+      <div class="container about-layout">
+        <div>
+          <p class="section__kicker" data-i18n="about.kicker">About</p>
+          <h2 class="section__title" data-i18n="about.title">Hello, I'm Fatemeh.</h2>
+          <p class="about__margin" data-i18n="about.margin">Curiosity is the common thread.</p>
+        </div>
         <div class="about__body" id="aboutBody"></div>
       </div>
     </section>
@@ -86,36 +100,28 @@
       </div>
     </section>
 
-    <!-- ===== Expertise (3 pillars) ===== -->
-    <section class="section section--tint" id="expertise">
+    <!-- ===== Background: capabilities, experience and credentials ===== -->
+    <section class="section background" id="background" aria-labelledby="backgroundTitle">
       <div class="container">
-        <p class="section__kicker" data-i18n="expertise.kicker">Expertise</p>
-        <h2 class="section__title" data-i18n="expertise.title">Three ways I think about a problem.</h2>
-        <div class="pillars" id="pillars"></div>
-      </div>
-    </section>
-
-    <!-- ===== Experience ===== -->
-    <section class="section" id="work">
-      <div class="container">
-        <p class="section__kicker" data-i18n="experience.kicker">Experience</p>
-        <h2 class="section__title" data-i18n="experience.title">Where I've worked.</h2>
-        <ol class="timeline" id="timeline"></ol>
-      </div>
-    </section>
-
-    <!-- ===== Certifications ===== -->
-    <section class="section" id="certs">
-      <div class="container">
-        <p class="section__kicker" data-i18n="certs.kicker">Credentials</p>
-        <h2 class="section__title" data-i18n="certs.title">Certifications & education.</h2>
-        <div class="certs" id="certs-grid"></div>
+        <p class="section__kicker" data-i18n="background.kicker">The background</p>
+        <h2 class="section__title" id="backgroundTitle" data-i18n="background.title">The practice behind the work.</h2>
+        <div id="expertise"><div class="pillars" id="pillars"></div></div>
+        <div class="background__columns">
+          <div id="work">
+            <h3 class="background__heading" data-i18n="experience.kicker">Experience</h3>
+            <ol class="timeline" id="timeline"></ol>
+          </div>
+          <div id="certs" class="background__credentials">
+            <h3 class="background__heading" data-i18n="background.learning">Education &amp; learning</h3>
+            <div class="certs" id="certs-grid"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ===== Testimonials ===== -->
     <section class="section section--tint" id="testimonials">
-      <div class="container section__narrow">
+      <div class="container">
         <p class="section__kicker" data-i18n="testimonials.kicker">Kind words</p>
         <h2 class="section__title" data-i18n="testimonials.title">What people say.</h2>
         <div class="quotes" id="quotes"></div>
@@ -134,7 +140,7 @@
 
     <!-- ===== Contact ===== -->
     <section class="section section--dark" id="contact">
-      <div class="container section__narrow">
+      <div class="container">
         <p class="section__kicker" data-i18n="contact.kicker">Contact</p>
         <h2 class="section__title" data-i18n="contact.title">Let's talk.</h2>
         <p class="section__intro" data-i18n="contact.intro"></p>
@@ -147,6 +153,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <p class="footer__copy" data-i18n="footer.copy">© 2026 Fatemeh Sheybani · Tehran, Iran</p>
+      <a href="#top" data-i18n="footer.top">Back to the beginning ↑</a>
     </div>
   </footer>
 
@@ -154,7 +161,7 @@
   <div class="modal" id="diaryModal" aria-hidden="true">
     <div class="modal__overlay" data-close></div>
     <article class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal__close" data-close aria-label="Close">&times;</button>
+      <button class="modal__close" data-close data-i18n-label="diary.close" aria-label="Close">&times;</button>
       <p class="modal__date" id="modalDate"></p>
       <h3 class="modal__title" id="modalTitle"></h3>
       <div class="modal__tags" id="modalTags"></div>
