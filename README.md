@@ -19,6 +19,7 @@ assets/
   js/   i18n.js        # EN/FA UI strings + long-form copy
         main.js        # rendering, language toggle (RTL), motion, scroll-spy
         story.js       # chapter navigation and interactive approach diagrams
+        motion.js      # scroll reveals, typewriter text, animated disclosures
   fonts/               # vendored woff2 files
   img/                 # portrait, favicon
 data/
@@ -45,6 +46,12 @@ uses native expandable details. Language switching preserves selected tabs and
 expanded details, including About, methods, and credentials. Motion follows
 the reader and respects reduced-motion settings.
 Earlier analyses remain available in the expandable foundations section.
+The hero heading and closing statement each type once as they enter view, with a
+blinking cursor, preserved emphasis and line breaks, and reserved text space to
+prevent layout shifts. The full text remains available
+to screen readers. Diagram entrances, interactive states, portrait and link
+feedback, and expandable details use progressive motion. Reduced-motion settings
+show the complete text immediately and disable animated transitions.
 
 Expertise, experience, and education share the Background section; full
 credentials remain expandable. Diary uses a featured entry and a compact index,

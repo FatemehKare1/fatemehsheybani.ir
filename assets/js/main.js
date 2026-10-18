@@ -184,7 +184,7 @@ const CONTACT = [
     renderTestimonials();
     renderDiary();
     renderContact();
-    observeReveal();
+    window.SiteMotion.refresh();
   }
 
   function setLang(next) {
@@ -280,29 +280,6 @@ const CONTACT = [
     targets.forEach(t => spy.observe(t));
   }
 
-  /* ---------- Reveal on scroll (with stagger) ---------- */
-  let io;
-  function markReveals() {
-    const sel = [".hero__eyebrow", ".hero__title", ".hero__lead", ".hero__cta", ".hero__portrait",
-                 ".section__kicker", ".section__title", ".section__intro"];
-    $$(sel.join(",")).forEach(el => el.classList.add("reveal"));
-  }
-  function observeReveal() {
-    if (io) io.disconnect();
-    const els = $$(".reveal:not(.is-in)");
-    // stagger each element by its position among its siblings
-    const counts = new Map();
-    els.forEach(el => {
-      const p = el.parentElement;
-      const i = counts.get(p) || 0; counts.set(p, i + 1);
-      el.style.transitionDelay = (Math.min(i, 8) * 70) + "ms";
-    });
-    io = new IntersectionObserver((entries) => {
-      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } });
-    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-    els.forEach(el => io.observe(el));
-  }
-
   /* ---------- Boot ---------- */
-  document.addEventListener("DOMContentLoaded", () => { markReveals(); setLang(lang); initScrollSpy(); });
+  document.addEventListener("DOMContentLoaded", () => { setLang(lang); initScrollSpy(); });
 })();
