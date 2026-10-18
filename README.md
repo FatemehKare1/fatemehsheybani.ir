@@ -62,8 +62,9 @@ positions when the viewport, language, fonts, or expanded evidence changes.
 A small knot repeats the motif at the ending. The artwork mirrors in RTL and
 shows a complete, static strand with reduced motion; it needs no image downloads.
 
-Expertise, experience, and education share the Background section; full
-credentials remain expandable. Diary uses a featured entry and a compact index,
+Expertise, experience, and education share the Background section. Experience
+leads with a full-width timeline; a compact Education & learning section follows
+underneath, with additional credentials expandable. Diary uses a featured entry and a compact index,
 with keyboard focus contained in the reader and restored on close. Contact
 prioritizes email and the CV. CV styling changes apply only on screen; the
 existing print layout is preserved.

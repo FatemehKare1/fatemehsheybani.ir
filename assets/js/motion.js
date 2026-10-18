@@ -5,7 +5,7 @@
   const revealSelectors = [
     ".hero__eyebrow", ".hero__title", ".hero__lead", ".hero__cta", ".hero__portrait",
     ".hero-thread li", ".section__kicker", ".section__title", ".section__intro",
-    ".about__summary", ".background__heading", ".background__credentials",
+    ".about__summary", ".background__heading",
     ".thread-sketch", ".story-ending__thread", ".story-lab", ".story-evidence", ".story-bridge", ".story-next",
     ".story-foundations", ".story-ending__contact", ".story-ending__back",
     ".contact__invitation", ".contact__elsewhere"

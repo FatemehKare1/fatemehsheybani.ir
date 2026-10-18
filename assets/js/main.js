@@ -87,9 +87,11 @@ const CONTACT = [
           <span class="tl__when">${esc(e.when[lang])}</span>
           <span class="tl__badge">${esc(e.badge[lang])}</span>
         </div>
-        <h4 class="tl__role">${esc(e[lang].role)}</h4>
-        <p class="tl__org">${esc(e[lang].org)}</p>
-        <p class="tl__desc">${esc(e[lang].desc)}</p>
+        <div class="tl__body">
+          <h4 class="tl__role">${esc(e[lang].role)}</h4>
+          <p class="tl__org">${esc(e[lang].org)}</p>
+          <p class="tl__desc">${esc(e[lang].desc)}</p>
+        </div>
       </li>`).join("");
   }
 
@@ -124,7 +126,7 @@ const CONTACT = [
       `<details class="credential-details" id="credential-details" ${open ? "open" : ""}>
         <summary>${esc(t("background.more"))} <span aria-hidden="true">+</span></summary>
         <p class="credentials-note">${esc(c.certsNote[lang])}</p>
-        ${c.certs.slice(2).map(item).join("")}
+        <div class="credential-details__grid">${c.certs.slice(2).map(item).join("")}</div>
       </details>`;
   }
 
