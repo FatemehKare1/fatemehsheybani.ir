@@ -52,6 +52,10 @@ prevent layout shifts. The full text remains available
 to screen readers. Diagram entrances, interactive states, portrait and link
 feedback, and expandable details use progressive motion. Reduced-motion settings
 show the complete text immediately and disable animated transitions.
+Headings marked with `data-phrase-reveal` reveal complete sentences in sequence
+on entering view. The work heading uses this for “A question.”, “A pattern.”,
+and “A way forward.”, with the same behavior in Persian. Inline phrases retain
+the original wrapping and remain fully available to screen readers.
 
 Expertise, experience, and education share the Background section; full
 credentials remain expandable. Diary uses a featured entry and a compact index,

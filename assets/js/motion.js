@@ -14,6 +14,24 @@
   const writers = new Set();
   const disclosures = new Map();
 
+  function preparePhrases() {
+    document.querySelectorAll("[data-phrase-reveal]").forEach(element => {
+      if (element.querySelector(".phrase-reveal__part")) return;
+      // Keep punctuation and whitespace so the original line wrapping is preserved.
+      const phrases = element.textContent.match(/[^.!?؟。]+[.!?؟。]*\s*/gu);
+      if (!phrases || phrases.length < 2) return;
+      element.replaceChildren(...phrases.map((phrase, index) => {
+        const part = document.createElement("span");
+        part.className = "phrase-reveal__part";
+        part.style.setProperty("--phrase-index", index);
+        part.textContent = phrase;
+        return part;
+      }));
+      element.classList.add("phrase-reveal", "reveal");
+      element.classList.remove("is-in");
+    });
+  }
+
   function prepareTypewriter(element) {
     const locale = document.documentElement.lang;
     const heading = element.matches(".hero__title");
@@ -92,6 +110,7 @@
     typingObserver?.disconnect();
     writers.forEach(writer => writer.finish());
     disclosures.forEach(state => state.settle());
+    preparePhrases();
     document.querySelectorAll(revealSelectors).forEach(el => el.classList.add("reveal"));
     const elements = document.querySelectorAll(".reveal:not(.is-in)");
     if (reduced.matches || !("IntersectionObserver" in window)) {
