@@ -5,6 +5,9 @@
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const selected = new Map();
   let host, chapterEls = [], links = [], pending = false;
+  let journey, threadPath, threadTip, threadNodes = [], threadStops = [], threadLength = 0;
+  let geometryDirty = true, resizeObserver;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   const tags = items => items.map(tag => `<span class="tag">${esc(tag)}</span>`).join("");
 
   function diagram(chapter, numeral) {
@@ -76,6 +79,12 @@
           <p class="story-rail__hint">${esc(copy.navHint)}</p>
         </aside>
         <div class="story-journey">
+          <svg class="story-thread" fill="none" aria-hidden="true" focusable="false">
+            <path class="story-thread__guide"/>
+            <path class="story-thread__ink" pathLength="1"/>
+            ${copy.chapters.map(() => '<circle class="story-thread__node" r="3.5"/>').join("")}
+            <circle class="story-thread__tip" r="3"/>
+          </svg>
           ${copy.chapters.map((c, i) => {
             const index = selected.get(c.id) || 0;
             const next = copy.chapters[i + 1];
@@ -141,6 +150,9 @@
             <div class="card__tags">${tags(p.tags)}</div></article>`).join("")}</div>
       </details>
       <div class="story-ending" id="story-ending">
+        <svg class="story-ending__thread" viewBox="0 0 180 58" fill="none" aria-hidden="true" focusable="false">
+          <path pathLength="1" d="M2 36C32 36 42 11 69 16C99 22 96 50 77 46C54 41 65 10 95 16C119 21 127 37 146 31C159 27 164 18 178 18"/>
+        </svg>
         <p class="section__kicker">${esc(copy.closing)}</p>
         <p class="story-ending__text">${esc(copy.closingBody)}</p>
         <a href="#contact" class="story-ending__contact">${esc(copy.contact)} ↗</a>
@@ -177,7 +189,53 @@
     });
     chapterEls = Array.from(host.querySelectorAll(".story-chapter"));
     links = Array.from(host.querySelectorAll("[data-chapter-link]"));
+    journey = host.querySelector(".story-journey");
+    threadPath = host.querySelector(".story-thread__ink");
+    threadTip = host.querySelector(".story-thread__tip");
+    threadNodes = Array.from(host.querySelectorAll(".story-thread__node"));
+    geometryDirty = true;
+    resizeObserver?.disconnect();
+    if ("ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(() => { geometryDirty = true; queueUpdate(); });
+      resizeObserver.observe(journey);
+    }
     queueUpdate();
+  }
+
+  function measureThread() {
+    geometryDirty = false;
+    const rect = journey.getBoundingClientRect();
+    const anchors = chapterEls.map(el => {
+      const kicker = el.querySelector(".story-chapter__kicker");
+      let y = kicker.offsetHeight / 2;
+      // Layout offsets ignore the headings' entrance transforms.
+      for (let item = kicker; item && item !== journey; item = item.offsetParent) y += item.offsetTop;
+      return y;
+    });
+    // Small loops tie each chapter into one uninterrupted, loosely curved strand.
+    let d = `M16 ${Math.max(0, anchors[0] - 20)}`;
+    let previous = Math.max(0, anchors[0] - 20);
+    threadStops = [{ y: previous, distance: 0 }];
+    anchors.forEach((y, index) => {
+      const gap = y - previous;
+      d += ` C-2 ${previous + gap * .3} 34 ${previous + gap * .7} 16 ${y}`;
+      threadPath.setAttribute("d", d);
+      threadStops.push({ y, distance: threadPath.getTotalLength() });
+      d += ` C31 ${y + 9} 22 ${y + 25} 12 ${y + 17} C2 ${y + 9} 8 ${y - 6} 16 ${y}`;
+      previous = y;
+      threadNodes[index].setAttribute("cx", "16");
+      threadNodes[index].setAttribute("cy", y);
+    });
+    const end = Math.max(previous + 30, rect.height - 12);
+    d += ` C-2 ${previous + (end - previous) * .35} 34 ${previous + (end - previous) * .7} 16 ${end}`;
+    const svg = threadPath.ownerSVGElement;
+    svg.setAttribute("viewBox", `0 0 32 ${rect.height}`);
+    // Preserve the measured vertical positions at every responsive gutter width.
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.querySelector(".story-thread__guide").setAttribute("d", d);
+    threadPath.setAttribute("d", d);
+    threadLength = threadPath.getTotalLength();
+    threadStops.push({ y: end, distance: threadLength });
   }
 
   function updateReading() {
@@ -196,11 +254,30 @@
     const progress = Math.max(0, Math.min(1, (readingLine - rects[0].top) /
       (rects[rects.length - 1].bottom - rects[0].top)));
     host.style.setProperty("--story-progress", progress);
+    if (geometryDirty) measureThread();
+    const readingY = readingLine - journey.getBoundingClientRect().top;
+    const next = threadStops.findIndex(stop => stop.y >= readingY);
+    let distance = threadLength;
+    if (next === 0) distance = 0;
+    else if (next > 0) {
+      const from = threadStops[next - 1], to = threadStops[next];
+      const fraction = (readingY - from.y) / (to.y - from.y);
+      distance = from.distance + (to.distance - from.distance) * fraction;
+    }
+    if (reduced.matches) distance = threadLength;
+    journey.style.setProperty("--thread-progress", distance / threadLength);
+    const point = threadPath.getPointAtLength(distance);
+    threadTip.setAttribute("cx", point.x);
+    threadTip.setAttribute("cy", point.y);
+    threadNodes.forEach((node, index) => {
+      node.classList.toggle("is-reached", reduced.matches || readingY >= threadStops[index + 1].y);
+    });
   }
   function queueUpdate() {
     if (!pending) { pending = true; requestAnimationFrame(updateReading); }
   }
   window.addEventListener("scroll", queueUpdate, { passive: true });
-  window.addEventListener("resize", queueUpdate, { passive: true });
+  window.addEventListener("resize", () => { geometryDirty = true; queueUpdate(); }, { passive: true });
+  reduced.addEventListener("change", queueUpdate);
   window.WorkStory = { render };
 })();

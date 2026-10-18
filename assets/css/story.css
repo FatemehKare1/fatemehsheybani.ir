@@ -1,6 +1,15 @@
 ﻿/* Illustrated editorial spreads; diagrams describe the work, not live data. */
 .work-story { border-top:1px solid var(--border); padding-top:4.5rem; }
+.work-story__opening { display:grid; grid-template-columns:minmax(0,1fr) 230px; align-items:center; gap:3rem; }
 .work-story__title { max-width:20ch; font-size:clamp(2.4rem,5vw,4.2rem); }
+.thread-sketch { display:block; width:100%; overflow:visible; color:var(--clay); margin-block-end:1rem; }
+.thread-sketch path { stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.thread-sketch__guide { opacity:.16; }
+.thread-sketch__ink { stroke-dasharray:1; }
+.thread-sketch__start { fill:var(--bg); stroke:currentColor; stroke-width:1.5; }
+.thread-sketch__needle { color:var(--ink-soft); }
+.thread-sketch.is-in .thread-sketch__ink { animation:thread-draw 2.8s var(--ease-out) .2s both; }
+.thread-sketch.is-in .thread-sketch__needle { animation:story-panel-in .5s ease 2.2s both; }
 .work-story__intro { max-width:67ch; color:var(--ink-soft); font-size:1.03rem; margin:0 0 4rem; }
 .story-layout { display:grid; grid-template-columns:150px minmax(0,1fr); gap:3.5rem; align-items:start; }
 .story-rail { position:sticky; top:106px; padding-top:.4rem; }
@@ -13,7 +22,14 @@
 .story-progress span { display:block; height:100%; background:var(--clay); transform:scaleX(var(--story-progress,0)); transform-origin:left; transition:transform .15s linear; }
 [dir="rtl"] .story-progress span { transform-origin:right; }
 .story-rail__hint { font-size:.68rem; color:var(--ink-mute); line-height:1.8; }
-.story-journey { min-width:0; }
+.story-journey { position:relative; min-width:0; }
+.story-thread { position:absolute; inset-block:0; inset-inline-start:-42px; width:32px; height:100%; overflow:visible; pointer-events:none; color:var(--clay); }
+.story-thread path { stroke:currentColor; stroke-width:1.5; stroke-linecap:round; vector-effect:non-scaling-stroke; }
+.story-thread__guide { opacity:.18; }
+.story-thread__ink { stroke-dasharray:1; stroke-dashoffset:calc(1 - var(--thread-progress,0)); }
+.story-thread__node { fill:var(--bg); stroke:var(--border); stroke-width:1.5; transition:fill .3s,stroke .3s; }
+.story-thread__node.is-reached { fill:var(--clay); stroke:var(--bg); }
+.story-thread__tip { fill:var(--clay); stroke:var(--bg); stroke-width:1.5; }
 .story-chapter {
   --chapter-accent:#8F3F24; --chapter-tint:#EEDDCE; --chapter-text:var(--ink); --chapter-soft:var(--ink-soft);
   --chapter-muted:#625B51; --chapter-rule:var(--border); --chapter-paper:var(--bg);
@@ -121,6 +137,11 @@ details[open] > summary .story-project__plus::after { transform:rotate(0); }
 .story-foundations > p { color:var(--ink-soft); max-width:65ch; font-size:.88rem; }
 .story-foundations .cards { margin-bottom:1.5rem; }
 .story-ending { padding:3rem 0 0; scroll-margin-top:110px; max-width:850px; margin-inline:auto; }
+.story-ending__thread { display:block; width:150px; height:48px; color:var(--clay); margin:0 0 1.5rem; overflow:visible; }
+.story-ending__thread path { stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-dasharray:1; }
+.story-ending__thread.is-in path { animation:thread-draw 1.8s var(--ease-out) .1s both; }
+[dir="rtl"] .thread-sketch,[dir="rtl"] .story-thread,[dir="rtl"] .story-ending__thread { scale:-1 1; }
+@keyframes thread-draw { from { stroke-dashoffset:1; } to { stroke-dashoffset:0; } }
 .story-ending__text { font:500 clamp(1.5rem,2.8vw,2rem)/1.5 var(--serif); margin:0 0 1.5rem; }
 .story-ending__contact { color:var(--clay-deep); font-size:.8rem; border-bottom:1px solid var(--border); }
 .story-ending__back { display:inline-block; color:var(--ink-mute); font-size:.7rem; margin-inline-start:1.5rem; }
@@ -164,12 +185,16 @@ details[open] > summary .story-project__plus::after { transform:rotate(0); }
 @keyframes connection-draw { from { transform:scaleY(0); } to { transform:scaleY(1); } }
 @media (prefers-reduced-motion:reduce) {
   .typewriter__cursor { display:none; }
+  .story-thread__ink { stroke-dashoffset:0; }
+  .story-thread__tip { display:none; }
 }
 [lang="fa"] .story-chapter__kicker,[lang="fa"] .artifact-heading > p,[lang="fa"] .story-lab__eyebrow { letter-spacing:0; }
 [lang="fa"] .story-bridge { font-style:normal; line-height:1.9; }
 @keyframes story-panel-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
 @media (max-width:1050px) {
+  .work-story__opening { grid-template-columns:minmax(0,1fr) 180px; gap:2rem; }
   .story-layout { grid-template-columns:120px minmax(0,1fr); gap:2rem; }
+  .story-thread { inset-inline-start:-28px; width:24px; }
   .story-lab__picture { padding-inline:1rem; }
   .artifact-map__node { padding:1rem .8rem; }
   .artifact-flow,.artifact-product { gap:1rem; }
@@ -181,8 +206,12 @@ details[open] > summary .story-project__plus::after { transform:rotate(0); }
 }
 @media (max-width:760px) {
   .work-story { padding-top:3rem; }
+  .work-story__opening { grid-template-columns:minmax(0,1fr); gap:0; }
+  .thread-sketch { width:130px; height:110px; justify-self:end; margin-block:-.5rem 1rem; }
   .work-story__intro { margin-bottom:2.5rem; }
   .story-layout { display:block; }
+  .story-journey { padding-inline-start:24px; }
+  .story-thread { inset-inline-start:0; width:16px; }
   .story-rail { top:70px; z-index:5; background:var(--bg); padding:.45rem 0 0; margin-bottom:2.5rem; border-bottom:1px solid var(--border); }
   .story-rail__heading,.story-rail__hint { display:none; }
   .story-nav { flex-direction:row; justify-content:space-between; gap:.5rem; }

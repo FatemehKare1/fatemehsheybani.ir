@@ -94,8 +94,18 @@
     <!-- ===== A connected story of the work ===== -->
     <section class="section work-story" id="projects" aria-labelledby="workStoryTitle">
       <div class="container">
-        <p class="section__kicker" data-i18n="projects.kicker">A thread through my work</p>
-        <h2 class="section__title work-story__title" id="workStoryTitle" data-i18n="projects.title" data-phrase-reveal>A question. A pattern. A way forward.</h2>
+        <div class="work-story__opening">
+          <div>
+            <p class="section__kicker" data-i18n="projects.kicker">A thread through my work</p>
+            <h2 class="section__title work-story__title" id="workStoryTitle" data-i18n="projects.title" data-phrase-reveal>A question. A pattern. A way forward.</h2>
+          </div>
+          <svg class="thread-sketch" viewBox="0 0 280 240" fill="none" aria-hidden="true" focusable="false">
+            <path class="thread-sketch__guide" d="M16 48C52 15 110 38 94 80C82 111 36 92 54 66C80 29 145 64 134 112C125 153 74 171 92 201C113 237 177 219 172 181C167 143 121 147 141 120C167 84 229 111 227 67C226 39 196 26 190 47C182 77 234 95 262 32"/>
+            <path class="thread-sketch__ink" pathLength="1" d="M16 48C52 15 110 38 94 80C82 111 36 92 54 66C80 29 145 64 134 112C125 153 74 171 92 201C113 237 177 219 172 181C167 143 121 147 141 120C167 84 229 111 227 67C226 39 196 26 190 47C182 77 234 95 262 32"/>
+            <circle class="thread-sketch__start" cx="16" cy="48" r="4"/>
+            <path class="thread-sketch__needle" d="m252 45 20-28-14 32-6-4Zm9-10 4-7"/>
+          </svg>
+        </div>
         <div id="work-story"></div>
       </div>
     </section>

@@ -56,6 +56,11 @@ Headings marked with `data-phrase-reveal` reveal complete sentences in sequence
 on entering view. The work heading uses this for “A question.”, “A pattern.”,
 and “A way forward.”, with the same behavior in Persian. Inline phrases retain
 the original wrapping and remain fully available to screen readers.
+An inline SVG thread is drawn beside the work introduction and continues as a
+scroll-traced strand connecting the four chapters. Its geometry follows chapter
+positions when the viewport, language, fonts, or expanded evidence changes.
+A small knot repeats the motif at the ending. The artwork mirrors in RTL and
+shows a complete, static strand with reduced motion; it needs no image downloads.
 
 Expertise, experience, and education share the Background section; full
 credentials remain expandable. Diary uses a featured entry and a compact index,
