@@ -89,7 +89,9 @@ const CONTACT = [
         </div>
         <div class="tl__body">
           <h4 class="tl__role">${esc(e[lang].role)}</h4>
-          <p class="tl__org">${esc(e[lang].org)}</p>
+          <p class="tl__org">${e.orgUrl
+            ? `<a href="${esc(e.orgUrl)}" target="_blank" rel="noopener noreferrer">${esc(e[lang].org)}</a>`
+            : esc(e[lang].org)}</p>
           <p class="tl__desc">${esc(e[lang].desc)}</p>
         </div>
       </li>`).join("");

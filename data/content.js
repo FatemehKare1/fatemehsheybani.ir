@@ -36,6 +36,7 @@ window.CONTENT = {
   /* ---- Experience timeline (most recent first) ---- */
   experience: [
     {
+      orgUrl: "https://www.linkedin.com/company/kareone",
       badge: { en: "Full-time", fa: "تمام‌وقت" },
       when: { en: "Oct 2025 — Present", fa: "مهر ۱۴۰۴ — اکنون" },
       en: { role: "Product Analyst", org: "Kareone",

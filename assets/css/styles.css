@@ -110,6 +110,8 @@ summary { cursor:pointer; }
 .tl__role { font:500 clamp(1.2rem,2vw,1.55rem)/1.35 var(--serif); margin:0 0 .35rem; }
 .tl__badge { font-size:.75rem; color:var(--ink-mute); }
 .tl__org { font-size:.9rem; color:var(--clay-deep); margin:0; }
+.tl__org a { text-decoration:underline; text-decoration-color:var(--border); text-underline-offset:.2em; }
+.tl__org a:hover { text-decoration-color:currentColor; }
 .tl__when { font-size:.8rem; font-weight:600; color:var(--ink-soft); }
 .tl__desc { color:var(--ink-soft); font-size:.92rem; line-height:1.8; margin:.7rem 0 0; max-width:65ch; }
 .timeline.is-tracking { isolation:isolate; }
