@@ -15,7 +15,7 @@ window.I18N = {
     "nav.menu": "Menu",
 
     "hero.eyebrow": "Product Analyst",
-    "hero.title": "From data to decisions.<br><em>The story in between.</em>",
+    "hero.title": "From data to decisions<br><em>and the story in between.</em>",
     "hero.folio": "Selected work & field notes",
     "hero.location": "Tehran, Iran",
     "hero.portraitCaption": "The analyst. The storyteller.",
@@ -89,7 +89,7 @@ window.I18N = {
     "nav.menu": "فهرست",
 
     "hero.eyebrow": "تحلیل‌گر محصول",
-    "hero.title": "از داده تا تصمیم.<br><em>روایتی که در میان است.</em>",
+    "hero.title": "از داده تا تصمیم،<br><em>و روایتی که در میان است.</em>",
     "hero.folio": "گزیده کارها و یادداشت‌ها",
     "hero.location": "تهران، ایران",
     "hero.portraitCaption": "تحلیل‌گر. و راوی.",
