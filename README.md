@@ -56,12 +56,10 @@ Headings marked with `data-phrase-reveal` reveal complete sentences in sequence
 on entering view. The work heading uses this for “A question.”, “A pattern.”,
 and “A way forward.”, with the same behavior in Persian. Inline phrases retain
 the original wrapping and remain fully available to screen readers.
-An inline SVG spool and threaded needle introduce the work narrative. A textured
-copper-colored strand follows the four chapters with irregular bends and loose
-crossings, using layered strokes and a scroll-revealed mask. Its geometry follows chapter
-positions when the viewport, language, fonts, or expanded evidence changes.
-A matching textured loop repeats the motif at the ending. The artwork mirrors in RTL and
-shows a complete, static strand with reduced motion; it needs no image downloads.
+A straight, fine margin rule connects the four chapters, with small serif chapter
+numbers and a clay reading-progress accent. CSS keeps the line aligned as the
+viewport, language, fonts, or expanded evidence changes. It moves to the right
+margin in Persian and shows the complete accent with reduced motion.
 
 Expertise, experience, and education share the Background section. Experience
 leads with a full-width timeline; a compact Education & learning section follows

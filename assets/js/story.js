@@ -5,9 +5,7 @@
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const selected = new Map();
   let host, chapterEls = [], links = [], pending = false;
-  let journey, threadPath, threadStops = [], threadLength = 0;
-  let geometryDirty = true, resizeObserver;
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let resizeObserver;
   const tags = items => items.map(tag => `<span class="tag">${esc(tag)}</span>`).join("");
 
   function diagram(chapter, numeral) {
@@ -79,23 +77,7 @@
           <p class="story-rail__hint">${esc(copy.navHint)}</p>
         </aside>
         <div class="story-journey">
-          <svg class="story-thread" fill="none" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="story-thread-copper" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
-                <stop offset="0" stop-color="#9A482C"/><stop offset=".45" stop-color="#C47A4E"/>
-                <stop offset=".72" stop-color="#A55434"/><stop offset="1" stop-color="#D2976B"/>
-              </linearGradient>
-              <mask id="story-thread-reveal" maskUnits="userSpaceOnUse" x="-4" y="0">
-                <path class="story-thread__mask" data-thread-path pathLength="1"/>
-              </mask>
-            </defs>
-            <path class="story-thread__shadow" data-thread-path/>
-            <path class="story-thread__guide" data-thread-path/>
-            <g mask="url(#story-thread-reveal)">
-              <path class="story-thread__ink" data-thread-path/>
-              <path class="story-thread__fiber" data-thread-path/>
-            </g>
-          </svg>
+          <div class="story-rule" aria-hidden="true"><span></span></div>
           ${copy.chapters.map((c, i) => {
             const index = selected.get(c.id) || 0;
             const next = copy.chapters[i + 1];
@@ -161,10 +143,6 @@
             <div class="card__tags">${tags(p.tags)}</div></article>`).join("")}</div>
       </details>
       <div class="story-ending" id="story-ending">
-        <svg class="story-ending__thread" viewBox="0 0 180 58" fill="none" aria-hidden="true" focusable="false">
-          <path class="story-ending__cord" d="M2 36C32 36 42 11 69 16C99 22 96 50 77 46C54 41 65 10 95 16C119 21 127 37 146 31C159 27 164 18 178 18"/>
-          <path class="story-ending__fiber" d="M2 36C32 36 42 11 69 16C99 22 96 50 77 46C54 41 65 10 95 16C119 21 127 37 146 31C159 27 164 18 178 18"/>
-        </svg>
         <p class="section__kicker">${esc(copy.closing)}</p>
         <p class="story-ending__text">${esc(copy.closingBody)}</p>
         <a href="#contact" class="story-ending__contact">${esc(copy.contact)} ↗</a>
@@ -201,74 +179,13 @@
     });
     chapterEls = Array.from(host.querySelectorAll(".story-chapter"));
     links = Array.from(host.querySelectorAll("[data-chapter-link]"));
-    journey = host.querySelector(".story-journey");
-    threadPath = host.querySelector(".story-thread__ink");
-    geometryDirty = true;
     resizeObserver?.disconnect();
     if ("ResizeObserver" in window) {
-      resizeObserver = new ResizeObserver(() => { geometryDirty = true; queueUpdate(); });
-      resizeObserver.observe(journey);
+      resizeObserver = new ResizeObserver(queueUpdate);
+      resizeObserver.observe(host.querySelector(".story-journey"));
       chapterEls.forEach(el => resizeObserver.observe(el));
     }
     queueUpdate();
-  }
-
-  function measureThread() {
-    geometryDirty = false;
-    const rect = journey.getBoundingClientRect();
-    const anchors = chapterEls.map(el => {
-      const kicker = el.querySelector(".story-chapter__kicker");
-      let y = kicker.offsetHeight / 2;
-      // Layout offsets ignore the headings' entrance transforms.
-      for (let item = kicker; item && item !== journey; item = item.offsetParent) y += item.offsetTop;
-      return y;
-    });
-    const svg = threadPath.ownerSVGElement;
-    const width = Math.max(16, svg.getBoundingClientRect().width);
-    const center = width / 2, slack = Math.max(5, center - 5);
-    const bound = x => Math.max(4, Math.min(width - 4, x));
-    let x = center, y = 0, wave = 0, d = `M${center} 0`;
-    threadStops = [{ y: 0, distance: 0 }];
-
-    // Short, irregular bends read as slack cord even between distant chapters.
-    function weaveTo(target) {
-      const steps = [148, 196, 164, 212, 156, 182];
-      while (target - y > .5) {
-        const height = Math.min(steps[wave % steps.length], target - y);
-        const endY = y + height;
-        const direction = wave % 2 ? 1 : -1;
-        const endX = endY === target ? center : center + [0, -.18, .2, -.12][wave % 4] * slack;
-        d += ` C${bound(x + direction * slack)} ${y + height * .28} ${bound(endX + direction * slack)} ${endY - height * .26} ${endX} ${endY}`;
-        x = endX; y = endY; wave++;
-      }
-    }
-    function stop() {
-      threadPath.setAttribute("d", d);
-      const distance = threadPath.getTotalLength();
-      if (y > threadStops[threadStops.length - 1].y + .1) threadStops.push({ y, distance });
-    }
-    anchors.forEach(anchor => {
-      weaveTo(Math.max(y, anchor - 22));
-      stop();
-      const start = y;
-      // A loose crossing at each chapter replaces the timeline's filled dots.
-      d += ` C${center - slack} ${start + 8} ${center - slack} ${start + 30} ${center} ${start + 35}`;
-      d += ` C${center + slack} ${start + 40} ${center + slack} ${start + 12} ${center + slack * .45} ${start + 10}`;
-      d += ` C${center} ${start + 8} ${center - slack * .5} ${start + 24} ${center} ${start + 30}`;
-      d += ` C${center + slack * .6} ${start + 35} ${center + slack * .45} ${start + 43} ${center} ${start + 48}`;
-      x = center; y = start + 48;
-      stop();
-    });
-    weaveTo(Math.max(y, rect.height - 10));
-    stop();
-    // One SVG unit equals one rendered pixel; mobile loops retain their height.
-    svg.setAttribute("viewBox", `0 0 ${width} ${rect.height}`);
-    svg.setAttribute("preserveAspectRatio", "none");
-    svg.querySelectorAll("[data-thread-path]").forEach(path => path.setAttribute("d", d));
-    const mask = svg.querySelector("mask");
-    mask.setAttribute("width", width + 8);
-    mask.setAttribute("height", rect.height);
-    threadLength = threadPath.getTotalLength();
   }
 
   function updateReading() {
@@ -287,24 +204,11 @@
     const progress = Math.max(0, Math.min(1, (readingLine - rects[0].top) /
       (rects[rects.length - 1].bottom - rects[0].top)));
     host.style.setProperty("--story-progress", progress);
-    if (geometryDirty) measureThread();
-    const readingY = readingLine - journey.getBoundingClientRect().top;
-    const next = threadStops.findIndex(stop => stop.y >= readingY);
-    let distance = threadLength;
-    if (next === 0) distance = 0;
-    else if (next > 0) {
-      const from = threadStops[next - 1], to = threadStops[next];
-      const fraction = (readingY - from.y) / (to.y - from.y);
-      distance = from.distance + (to.distance - from.distance) * fraction;
-    }
-    if (reduced.matches) distance = threadLength;
-    journey.style.setProperty("--thread-progress", threadLength ? distance / threadLength : 1);
   }
   function queueUpdate() {
     if (!pending) { pending = true; requestAnimationFrame(updateReading); }
   }
   window.addEventListener("scroll", queueUpdate, { passive: true });
-  window.addEventListener("resize", () => { geometryDirty = true; queueUpdate(); }, { passive: true });
-  reduced.addEventListener("change", queueUpdate);
+  window.addEventListener("resize", queueUpdate, { passive: true });
   window.WorkStory = { render };
 })();
