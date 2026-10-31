@@ -56,10 +56,10 @@ Headings marked with `data-phrase-reveal` reveal complete sentences in sequence
 on entering view. The work heading uses this for “A question.”, “A pattern.”,
 and “A way forward.”, with the same behavior in Persian. Inline phrases retain
 the original wrapping and remain fully available to screen readers.
-A straight, fine margin rule connects the four chapters, with small serif chapter
-numbers and a clay reading-progress accent. CSS keeps the line aligned as the
-viewport, language, fonts, or expanded evidence changes. It moves to the right
-margin in Persian and shows the complete accent with reduced motion.
+A continuous, static 1px margin rule connects the four chapters. Chapter numbers
+stay in the headings and navigation, leaving the line uninterrupted. CSS keeps
+it aligned as content expands and moves it to the right margin in Persian.
+Reading progress remains in the navigation.
 
 Expertise, experience, and education share the Background section. Experience
 leads with a full-width timeline; a compact Education & learning section follows

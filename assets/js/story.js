@@ -77,14 +77,13 @@
           <p class="story-rail__hint">${esc(copy.navHint)}</p>
         </aside>
         <div class="story-journey">
-          <div class="story-rule" aria-hidden="true"><span></span></div>
+          <div class="story-rule" aria-hidden="true"></div>
           ${copy.chapters.map((c, i) => {
             const index = selected.get(c.id) || 0;
             const next = copy.chapters[i + 1];
             return `
             <article class="story-chapter story-chapter--${c.visual}" id="chapter-${c.id}" aria-labelledby="title-${c.id}">
               <header class="story-chapter__head reveal">
-                <span class="story-chapter__number" aria-hidden="true">${numeral(i + 1)}</span>
                 <p class="story-chapter__kicker">${esc(copy.chapter)} ${numeral(i + 1)} <span> / </span> ${esc(c.word)}</p>
                 <h3 id="title-${c.id}">${esc(c.title)}</h3>
               </header>
@@ -195,8 +194,6 @@
     let current = 0;
     const rects = chapterEls.map(el => el.getBoundingClientRect());
     rects.forEach((rect, i) => { if (rect.top <= readingLine) current = i; });
-    const visible = rects[current].bottom > 80 && rects[current].top < window.innerHeight;
-    chapterEls.forEach((el, i) => el.classList.toggle("is-reading", visible && i === current));
     links.forEach((link, i) => {
       if (i === current) link.setAttribute("aria-current", "step");
       else link.removeAttribute("aria-current");
