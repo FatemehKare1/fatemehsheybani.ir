@@ -62,7 +62,12 @@ it aligned as content expands and moves it to the right margin in Persian.
 Reading progress remains in the navigation.
 
 Expertise, experience, and education share the Background section. Experience
-leads with a full-width timeline; a compact Education & learning section follows
+leads with a full-width timeline. Scrolling fills its straight line from the first
+role's dot to the last and highlights the role at the reading position with a
+clay title, stronger date color, and slightly enlarged dot. The emphasis reverses
+when scrolling back, and layout changes or language switching recalculate the
+positions. Reduced motion shows a static filled timeline and uses only text color
+to indicate the active role. A compact Education & learning section follows
 underneath, with additional credentials expandable. Diary uses a featured entry and a compact index,
 with keyboard focus contained in the reader and restored on close. Contact
 prioritizes email and the CV. CV styling changes apply only on screen; the

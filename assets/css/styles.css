@@ -112,6 +112,17 @@ summary { cursor:pointer; }
 .tl__org { font-size:.9rem; color:var(--clay-deep); margin:0; }
 .tl__when { font-size:.8rem; font-weight:600; color:var(--ink-soft); }
 .tl__desc { color:var(--ink-soft); font-size:.92rem; line-height:1.8; margin:.7rem 0 0; max-width:65ch; }
+.timeline.is-tracking { isolation:isolate; }
+.timeline.is-tracking::before,.timeline.is-tracking::after { content:""; position:absolute; top:var(--timeline-start,10.5px); bottom:auto; inset-inline-start:4px; width:1px; height:var(--timeline-length,0px); pointer-events:none; z-index:0; }
+.timeline.is-tracking::before { background:var(--border); }
+.timeline.is-tracking::after { background:var(--clay); transform:scaleY(var(--timeline-progress,0)); transform-origin:center top; transition:transform .12s linear; }
+.timeline.is-tracking .tl { z-index:1; }
+.timeline.is-tracking .tl__dot { background:var(--bg-tint); border:1.5px solid #BE937A; box-shadow:0 0 0 5px var(--bg-tint); transition:background-color .18s,border-color .18s,transform .2s,box-shadow .2s; }
+.timeline.is-tracking .tl.is-reached .tl__dot { background:var(--clay); border-color:var(--clay); }
+.timeline.is-tracking .tl.is-current .tl__dot { background:var(--clay); border-color:var(--clay); transform:scale(1.35); box-shadow:0 0 0 4px var(--bg-tint),0 0 0 5px #AD4F2E38; }
+.timeline.is-tracking .tl__role,.timeline.is-tracking .tl__when { transition:color .18s; }
+.timeline.is-tracking .tl.is-current .tl__role { color:var(--clay-deep); }
+.timeline.is-tracking .tl.is-current .tl__when { color:var(--ink); }
 .certs { display:grid; grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr)); gap:0 2rem; }
 .cert { display:grid; grid-template-columns:24px minmax(0,1fr); gap:.85rem; padding:.3rem 0 1.25rem; }
 .cert__mark { display:block; color:var(--clay-deep); padding-top:.1rem; }
@@ -316,4 +327,6 @@ main.lang-swapping { opacity:0; }
   *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
   .reveal { opacity:1; transform:none; }
   .phrase-reveal .phrase-reveal__part { opacity:1; }
+  .timeline.is-tracking::after { transform:none; }
+  .timeline.is-tracking .tl__dot,.timeline.is-tracking .tl.is-current .tl__dot { background:var(--clay); border-color:var(--clay); transform:none; box-shadow:0 0 0 5px var(--bg-tint); }
 }

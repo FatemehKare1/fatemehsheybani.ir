@@ -81,7 +81,7 @@ const CONTACT = [
 
   function renderExperience() {
     $("#timeline").innerHTML = window.CONTENT.experience.map(e => `
-      <li class="tl reveal">
+      <li class="tl">
         <span class="tl__dot" aria-hidden="true"></span>
         <div class="tl__period">
           <span class="tl__when">${esc(e.when[lang])}</span>

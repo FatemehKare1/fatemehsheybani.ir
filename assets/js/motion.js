@@ -13,6 +13,56 @@
   let observer, typingObserver;
   const writers = new Set();
   const disclosures = new Map();
+  let timeline, experienceRows = [], experienceObserver, experiencePending = false;
+
+  function updateExperience() {
+    experiencePending = false;
+    if (!timeline || !experienceRows.length) return;
+    const top = timeline.getBoundingClientRect().top;
+    // Layout offsets keep the line anchored to the dots even when the active
+    // dot scales. Read all positions before applying presentation changes.
+    const stops = experienceRows.map(row => {
+      const dot = row.querySelector(".tl__dot");
+      return row.offsetTop + dot.offsetTop + dot.offsetHeight / 2;
+    });
+    const start = stops[0], length = stops[stops.length - 1] - start;
+    const readingPosition = window.innerHeight * .45 - top;
+    const progress = length > 0
+      ? Math.max(0, Math.min(1, (readingPosition - start) / length))
+      : Number(readingPosition >= start);
+    let current = -1;
+    stops.forEach((stop, index) => {
+      if (readingPosition >= stop) current = index;
+    });
+    timeline.style.setProperty("--timeline-start", `${start}px`);
+    timeline.style.setProperty("--timeline-length", `${length}px`);
+    timeline.style.setProperty("--timeline-progress", progress);
+    experienceRows.forEach((row, index) => {
+      row.classList.toggle("is-current", index === current);
+      row.classList.toggle("is-reached", index <= current);
+    });
+  }
+
+  function queueExperienceUpdate() {
+    if (experiencePending) return;
+    experiencePending = true;
+    requestAnimationFrame(updateExperience);
+  }
+
+  function refreshExperience() {
+    experienceObserver?.disconnect();
+    timeline = document.getElementById("timeline");
+    experienceRows = Array.from(timeline?.querySelectorAll(".tl") || []);
+    if (!experienceRows.length) return;
+    timeline.classList.add("is-tracking");
+    if ("ResizeObserver" in window) {
+      experienceObserver = new ResizeObserver(queueExperienceUpdate);
+      experienceObserver.observe(timeline);
+      // Expanding earlier sections can move Experience without resizing it.
+      experienceObserver.observe(document.querySelector("main"));
+    }
+    queueExperienceUpdate();
+  }
 
   function preparePhrases() {
     document.querySelectorAll("[data-phrase-reveal]").forEach(element => {
@@ -106,6 +156,7 @@
   }
 
   function refresh() {
+    refreshExperience();
     observer?.disconnect();
     typingObserver?.disconnect();
     writers.forEach(writer => writer.finish());
@@ -186,5 +237,8 @@
   reduced.addEventListener("change", () => {
     if (reduced.matches) refresh();
   });
+  window.addEventListener("scroll", queueExperienceUpdate, { passive: true });
+  window.addEventListener("resize", queueExperienceUpdate, { passive: true });
+  document.fonts?.ready.then(queueExperienceUpdate);
   window.SiteMotion = { refresh };
 })();
